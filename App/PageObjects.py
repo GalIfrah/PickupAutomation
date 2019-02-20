@@ -103,10 +103,17 @@ class HomePage(GenericPO):
                                           By.ID).click()
 
     @staticmethod
-    def getLoginButtonText():
+    def getLoginConectedButtonText():
         time.sleep(3)
         text = GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['CONNECT_BTN_TEXT_AREA'],
                                           By.XPATH).text
+        return text
+
+    @staticmethod
+    def getLoginUnConectedButtonText():
+        time.sleep(3)
+        text = GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['CONNECT_BTN'],
+                                          By.ID).text
         return text
 
     @staticmethod
