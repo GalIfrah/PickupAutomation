@@ -34,18 +34,20 @@ class ConnectTestsClass(BasicTestClass, unittest.TestCase):
         # login
         Connect.login()
 
-        current_login_button_text = HomePage.getLoginConectedButtonText()
+        assert 2 > 3, "not greater"
 
-        before_login_button_text = config['HOME_PAGE']['TEXTS']['CONNECT_BUTTON_BEFORE_LOGIN']
-
-        assert current_login_button_text != before_login_button_text
-
-        # logout
-        Connect.logout()
-
-        current_login_button_text = HomePage.getLoginUnConectedButtonText()
-
-        assert current_login_button_text == before_login_button_text
+        # current_login_button_text = HomePage.getLoginConectedButtonText()
+        #
+        # before_login_button_text = config['HOME_PAGE']['TEXTS']['CONNECT_BUTTON_BEFORE_LOGIN']
+        #
+        # assert current_login_button_text != before_login_button_text
+        #
+        # # logout
+        # Connect.logout()
+        #
+        # current_login_button_text = HomePage.getLoginUnConectedButtonText()
+        #
+        # assert current_login_button_text == before_login_button_text
 
     # def test_103_checkMigration(self):
     #     pass

@@ -8,6 +8,7 @@ web_driver = None
 from Infrastructure.WebDriverWrapper import Wrapper
 from Infrastructure.BasicTest import BasicTestClass
 
+
 @pytest.fixture(scope="function")
 def driver_init(request, env):
 
