@@ -1,10 +1,7 @@
 from _pytest import config
 from selenium.common.exceptions import StaleElementReferenceException, WebDriverException, NoSuchElementException
-from selenium.webdriver.common.by import By
-from Infrastructure.GenericPageObject import GenericPO
 from Services.ErrorService import ErrorsHandler
 from Services.utils import ProjectUtils
-import time
 import logging
 from Services.SmsServices import *
 from pytest_testconfig import config
@@ -41,7 +38,7 @@ class Connect(GenericPO):
 
         HomePage.clickOnConnect()
 
-        EnterPhonePage.enterValidPhoneNumber(phoneNumber=SmsService.getFirstAvailableNumber())
+        EnterPhonePage.enterValidPhoneNumber(phone_number=SmsService.getFirstAvailableNumber())
 
         EnterPhonePage.submitPhoneNumber()
 
@@ -93,9 +90,9 @@ class HomePage(GenericPO):
 
     @staticmethod
     def getAppLinkText():
-        appLinkText = GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['BACK_TO_APP_HEADER_LINK'],
-                                                        By.XPATH).text
-        return appLinkText
+        app_link_text = GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['BACK_TO_APP_HEADER_LINK'],
+                                                          By.XPATH).text
+        return app_link_text
 
     @staticmethod
     def clickOnConnect():
@@ -103,10 +100,10 @@ class HomePage(GenericPO):
                                           By.ID).click()
 
     @staticmethod
-    def getLoginConectedButtonText():
+    def getLoginConnectedButtonText():
         time.sleep(3)
         text = GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['CONNECT_BTN_TEXT_AREA'],
-                                          By.XPATH).text
+                                                 By.XPATH).text
         return text
 
     @staticmethod
@@ -118,14 +115,14 @@ class HomePage(GenericPO):
 
     @staticmethod
     def getInputsPlaceHolder():
-        placeHolders = [
+        place_holders = [
             GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_PLACE_HOLDER'],
                                               By.XPATH).text,
             GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['SELECT_DATE_PLACE_HOLDER'],
                                               By.XPATH).text,
             GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['SELECT_TIME_PLACE_HOLDER'],
                                               By.XPATH).text]
-        return placeHolders
+        return place_holders
 
     @staticmethod
     def chooseLocation():
@@ -136,9 +133,33 @@ class HomePage(GenericPO):
 
     @staticmethod
     def getLocationsList():
-        locationsList = GenericPO.webDriver.getDropDownOptionsList(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'])
+        locations_list = GenericPO.webDriver.getDropDownOptionsList(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'])
 
-        return locationsList
+        return locations_list
+
+    @staticmethod
+    def getTestLocation(locations_list, location_to_find):
+        time.sleep(2)
+
+        test_location = ''
+
+        counter = 0
+
+        for location in locations_list:
+
+            if location.text == location_to_find:
+
+                test_location = location.text
+
+                break
+
+                counter += 1
+
+            elif location.text != location_to_find and counter == len(locations_list) - 1:
+
+                assert False, ErrorsHandler.TEST_LOCATION_DOES_PNOT_EXIST + location_to_find + " " + location.text
+
+        return test_location
 
     @staticmethod
     def chooseDate():
@@ -151,63 +172,84 @@ class HomePage(GenericPO):
 
                                                config['HOME_PAGE']['DATA']['TIME'])
 
+    # @staticmethod
+    # def startOrder(test_location_number):
+    #     if test_location_number == 1:
+    #             GenericPO.webDriver.selectFromDropDown(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'],
+    #                                                    config['HOME_PAGE']['DATA']['FIRST_LOCATION_NOT_WORKING'])
+    #
+    #     if test_location_number == 2:
+    #             time.sleep(1)
+    #             GenericPO.webDriver.selectFromDropDown(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'],
+    #                                                    config['HOME_PAGE']['DATA']['SECOND_LOCATION'])
+    #
+    #
+    #     time.sleep(2)
+    #     GenericPO.webDriver.waitForElemToBeClickable(config['HOME_PAGE']['LOCATORS']['START_ORDER_BUTTON'])
+    #
+    #     time.sleep(3)
+    #     if GenericPO.webDriver.getCurrentUrl() == config['MENU']['LOCATORS']['MENU_URL']:
+    #                 pass
+    #
+    #
+    #     elif HomePage.getStartOrderPopup() is not None:
+    #
+    #             if HomePage.getStartOrderPopup().text == config['HOME_PAGE']['TEXTS']['START_ORDER_CHOOSE_LOCATION_POPUP_TEXT']:
+    #
+    #                     HomePage.clickOnStartOrderPopupButton()
+    #
+    #                     HomePage.chooseLocation()
+    #
+    #                     HomePage.startOrder(1)
+    #
+    #             elif HomePage.getStartOrderPopup().text == config['HOME_PAGE']['TEXTS']['START_ORDER_TIME_EXCEEDED_POPUP_TEXT']:
+    #
+    #                     HomePage.clickOnStartOrderPopupButton()
+    #
+    #                     HomePage.startOrder(2)
+    #
+    #             elif HomePage.getStartOrderPopup().text == config['HOME_PAGE']['TEXTS']['START_ORDER_NOT_ACCEPTING_POPUP_TEXT']:
+    #
+    #                     HomePage.clickOnStartOrderPopupButton()
+    #
+    #                     HomePage.startOrder(2)
+    #
+    #             elif HomePage.getStartOrderPopup().text == config['HOME_PAGE']['TEXTS']['START_ORDER_SELECT_TIME_POPUP_TEXT']:
+    #
+    #                     HomePage.clickOnStartOrderPopupButton()
+    #
+    #                     HomePage.chooseLocation()
+    #
+    #                     HomePage.startOrder(2)
     @staticmethod
-    def startOrder(testLocationNumber):
-        if testLocationNumber == 1:
-                GenericPO.webDriver.selectFromDropDown(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'],
-                                               config['HOME_PAGE']['DATA']['FIRST_LOCATION_NOT_WORKING'])
+    def startOrder(location_to_order_from):
+        time.sleep(1)
+        founded_location = HomePage.getTestLocation(locations_list=HomePage.getLocationsList(), location_to_find=location_to_order_from)
 
-        if testLocationNumber == 2:
-                time.sleep(1)
-                GenericPO.webDriver.selectFromDropDown(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'],
-                                                   config['HOME_PAGE']['DATA']['SECOND_LOCATION'])
-
+        GenericPO.webDriver.selectFromDropDown(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'],
+                                               founded_location)
 
         time.sleep(2)
         GenericPO.webDriver.waitForElemToBeClickable(config['HOME_PAGE']['LOCATORS']['START_ORDER_BUTTON'])
+        time.sleep(5)
 
-        time.sleep(3)
-        if GenericPO.webDriver.getCurrentUrl() == config['MENU']['LOCATORS']['MENU_URL']:
-                    pass
+    @staticmethod
+    def startOrderWithErrors(location_to_order_from):
+        time.sleep(1)
+        founded_location = HomePage.getTestLocation(locations_list=HomePage.getLocationsList(),
+                                                    location_to_find=location_to_order_from)
 
+        GenericPO.webDriver.selectFromDropDown(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'],
+                                               founded_location)
 
-        elif HomePage.getStartOrderPopup() is not None:
-
-                if HomePage.getStartOrderPopup().text == config['HOME_PAGE']['TEXTS']['START_ORDER_CHOOSE_LOCATION_POPUP_TEXT']:
-
-                        HomePage.clickOnStartOrderPopupButton()
-
-                        HomePage.chooseLocation()
-
-                        HomePage.startOrder(1)
-
-                elif HomePage.getStartOrderPopup().text == config['HOME_PAGE']['TEXTS']['START_ORDER_TIME_EXCEEDED_POPUP_TEXT']:
-
-                        HomePage.clickOnStartOrderPopupButton()
-
-                        HomePage.startOrder(2)
-
-                elif HomePage.getStartOrderPopup().text == config['HOME_PAGE']['TEXTS']['START_ORDER_NOT_ACCEPTING_POPUP_TEXT']:
-
-                        HomePage.clickOnStartOrderPopupButton()
-
-                        HomePage.startOrder(2)
-
-                elif HomePage.getStartOrderPopup().text == config['HOME_PAGE']['TEXTS']['START_ORDER_SELECT_TIME_POPUP_TEXT']:
-
-                        HomePage.clickOnStartOrderPopupButton()
-
-                        HomePage.chooseLocation()
-
-                        HomePage.startOrder(2)
-
-
+        time.sleep(2)
+        GenericPO.webDriver.waitForElemToBeClickable(config['HOME_PAGE']['LOCATORS']['START_ORDER_BUTTON'])
 
 
     @staticmethod
     def getStartOrderPopup():
         element = GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['START_ORDER_POPUP_TEXT_AREA'],
-                                      By.XPATH)
+                                                    By.XPATH)
         return element
 
     @staticmethod
@@ -254,18 +296,17 @@ class Account(GenericPO):
 
         try:
 
-             GenericPO.webDriver.hoverAndClick(config['HOME_PAGE']['LOCATORS']['ACCOUNT']['ACCOUNT_BUTTON'],
-                                               config['HOME_PAGE']['LOCATORS']['ACCOUNT']['PAYMENT_METHODS_BUTTON'])
-             time.sleep(1)
+            GenericPO.webDriver.hoverAndClick(config['HOME_PAGE']['LOCATORS']['ACCOUNT']['ACCOUNT_BUTTON'],
+                                              config['HOME_PAGE']['LOCATORS']['ACCOUNT']['PAYMENT_METHODS_BUTTON'])
+            time.sleep(1)
 
-             walletSection = GenericPO.webDriver.waitForVisibilityOfElem(config['WALLET']['LOCATORS']['CARDS_SECTION'])
+            wallet_section = GenericPO.webDriver.waitForVisibilityOfElem(config['WALLET']['LOCATORS']['CARDS_SECTION'])
 
 
-             if walletSection is None:
-
-                 GenericPO.webDriver.hoverAndClick(config['HOME_PAGE']['LOCATORS']['ACCOUNT']['ACCOUNT_BUTTON'],
+            if wallet_section is None:
+                GenericPO.webDriver.hoverAndClick(config['HOME_PAGE']['LOCATORS']['ACCOUNT']['ACCOUNT_BUTTON'],
                                                   config['HOME_PAGE']['LOCATORS']['ACCOUNT']['PAYMENT_METHODS_BUTTON'])
-                 time.sleep(1)
+                time.sleep(1)
 
         except NoSuchElementException:
             logging.error(ErrorsHandler.WALLET_IS_NOT_VISIBLE)
@@ -303,7 +344,7 @@ class AccountInformation(GenericPO):
     @staticmethod
     def getNameText():
         name_text = GenericPO.webDriver.findElementBy("//*[@id='modal-body']/div/div[1]/div/input",
-                                            By.XPATH).text
+                                                      By.XPATH).text
         return name_text
 
 
@@ -314,7 +355,7 @@ class History(GenericPO):
     def getHistoryList():
 
         history_list = GenericPO.webDriver.remoteWebDriver.find_elements_by_xpath(config['HISTORY_SCREEN']['LOCATORS']['HISTORY_ORDERS_LIST'],
-                                            By.XPATH)
+                                                                                  By.XPATH)
         return history_list
 
 
@@ -340,8 +381,9 @@ class EnterPhonePage(GenericPO):
         return element
 
     @staticmethod
-    def enterValidPhoneNumber(phoneNumber):
-        GenericPO.webDriver.findElementBy(config['ENTER_PHONE_PAGE']['LOCATORS']['PHONE_FIELD'], By.XPATH).send_keys(phoneNumber)
+    def enterValidPhoneNumber(phone_number):
+        GenericPO.webDriver.findElementBy(config['ENTER_PHONE_PAGE']['LOCATORS']['PHONE_FIELD'], By.XPATH).send_keys(phone_number)
+        time.sleep(3)
 
     @staticmethod
     def submitPhoneNumber():
@@ -370,7 +412,7 @@ class EnterPhonePage(GenericPO):
 
     @staticmethod
     def enterSmsCode():
-
+        # time.sleep(180)
         code = SmsService.getSmsCode()
 
         GenericPO.webDriver.switchToWindow(0)
@@ -401,14 +443,19 @@ class EnterPhonePage(GenericPO):
         GenericPO.webDriver.findElementBy(config['ENTER_PHONE_PAGE']['LOCATORS']['RESEND_CODE'],
                                           By.XPATH).click()
 
+    @staticmethod
+    def getPhoneUsagesText():
+        GenericPO.webDriver.findElementBy(config['ENTER_PHONE_PAGE']['LOCATORS']['PHONE_USAGES_TEXT_AREA'],
+                                          By.XPATH).text
+
 
 class EnterEmailPage(GenericPO):
 
     @staticmethod
     def enterUnExistEmail():
-        UN_EXIST_EMAIL = ProjectUtils.createRandomMail()
+        un_exist_email = ProjectUtils.createRandomMail()
         GenericPO.webDriver.findElementBy(config['ENTER_EMAIL_PAGE']['LOCATORS']['ENTER_EMAIL_FIELD'],
-                                          By.XPATH).send_keys(UN_EXIST_EMAIL)
+                                          By.XPATH).send_keys(un_exist_email)
 
     @staticmethod
     def submitEmail():
@@ -611,7 +658,7 @@ class Wallet(GenericPO):
     @staticmethod
     def getWeAcceptCardsText():
         we_accept_cards_text = GenericPO.webDriver.findElementBy(config['WALLET']['LOCATORS']['ACCEPTED_CARDS_TEXT_AREA'],
-                                                              By.XPATH).text
+                                                                 By.XPATH).text
         return we_accept_cards_text
 
     @staticmethod
@@ -621,7 +668,7 @@ class Wallet(GenericPO):
     @staticmethod
     def getPciFooterText():
         pci_footer_text = GenericPO.webDriver.findElementBy(config['WALLET']['LOCATORS']['PCI_FOOTER_TEXT_AREA'],
-                                          By.XPATH).text
+                                                            By.XPATH).text
         return pci_footer_text
 
     @staticmethod
@@ -675,12 +722,12 @@ class Menu(GenericPO):
     def chooseFirstCategory():
         time.sleep(1)
         GenericPO.webDriver.findElementBy(config['MENU']['LOCATORS']['FIRST_CATEGORY'],
-            By.XPATH).click()
+                                          By.XPATH).click()
 
     @staticmethod
     def chooseSecondCategory():
         GenericPO.webDriver.findElementBy(config['MENU']['LOCATORS']['SECOND_CATEGORY'],
-            By.XPATH).click()
+                                          By.XPATH).click()
 
     @staticmethod
     def checkIfCategoryChosen():
@@ -729,7 +776,7 @@ class Menu(GenericPO):
     @staticmethod
     def getCartSecondItemText():
         text = GenericPO.webDriver.findElementBy(config['MENU']['LOCATORS']['CART_SECOND_ITEM_TEXT'],
-                                          By.XPATH).text
+                                                 By.XPATH).text
         return text
 
     @staticmethod
@@ -753,13 +800,13 @@ class Menu(GenericPO):
     @staticmethod
     def getModifiersModal():
         modifier_modal = GenericPO.webDriver.findElementBy(config['MENU']['LOCATORS']['MODIFIER_MODAL'],
-                                                       By.XPATH)
+                                                           By.XPATH)
         return modifier_modal
 
     @staticmethod
     def getModifiersModalHeaderText():
         header_text = GenericPO.webDriver.findElementBy(config['MENU']['LOCATORS']['MODIFIER_MODAL_HEADER'],
-                                          By.XPATH).text
+                                                        By.XPATH).text
         return header_text
 
     @staticmethod
@@ -775,7 +822,7 @@ class Menu(GenericPO):
 
     @staticmethod
     def getCartItemsList():
-        cart_items_list = GenericPO.webDriver.findELementsBy(config['MENU']['LOCATORS']['CART_ITEMS_CONTAINER'], By.XPATH)
+        cart_items_list = GenericPO.webDriver.findElementsBy(config['MENU']['LOCATORS']['CART_ITEMS_CONTAINER'], By.XPATH)
 
         return cart_items_list
 
@@ -783,7 +830,7 @@ class Menu(GenericPO):
     def getModifiersBySection():
         time.sleep(1)
 
-        modifiers_list = GenericPO.webDriver.findELementsBy(config['MENU']['LOCATORS']['SECOND_CATEGORY_MODIFIERS'], By.XPATH)
+        modifiers_list = GenericPO.webDriver.findElementsBy(config['MENU']['LOCATORS']['SECOND_CATEGORY_MODIFIERS'], By.XPATH)
 
         return modifiers_list
 
@@ -812,22 +859,8 @@ class Menu(GenericPO):
     @staticmethod
     def clickOnProceedToCheckout():
 
-        #if BasicTestClass.platform == "desktop":
-
                 GenericPO.webDriver.findElementBy(config['MENU']['LOCATORS']['PROCEED_TO_CHECKOUT_BUTTON'],
                                                   By.XPATH).click()
-
-        #elif BasicTestClass.platform == "mobile":
-
-                # GenericPO.webDriver.findElementBy("//div[@id='toast-container']",
-                #                                   LocatorsType=LocatorsTypes.XPATH).click()
-                # time.sleep(1)
-                #
-                # GenericPO.webDriver.findElementBy(params['MENU']['LOCATORS']['MOBILE_CART_ICON'],
-                #                                   LocatorsType=LocatorsTypes.XPATH).click()
-
-                # GenericPO.webDriver.findElementBy(params['MENU']['LOCATORS']['PROCEED_TO_CHECKOUT_BUTTON'],
-                #                               LocatorsType=LocatorsTypes.XPATH).click()
 
     @staticmethod
     def getPopup():
@@ -886,19 +919,19 @@ class Checkout(GenericPO):
     @staticmethod
     def submit4digitsCode():
         GenericPO.webDriver.findElementBy(config['CHECKOUT_SCREEN']['LOCATORS']['POPUP_OK_BTN'],
-                                           By.XPATH).click()
+                                          By.XPATH).click()
         time.sleep(2)
 
     @staticmethod
     def Pass4DigitsPin():
-       if config['CHECKOUT_SCREEN']['DATA']['4_DIGIT_EXIST'] == 1:
+        if config['CHECKOUT_SCREEN']['DATA']['4_DIGIT_EXIST'] == 1:
 
-        Checkout.enter4DigitsCode()
+            Checkout.enter4DigitsCode()
 
-        Checkout.submit4digitsCode()
+            Checkout.submit4digitsCode()
 
-       else:
-           pass
+        else:
+            pass
 
     @staticmethod
     def getErrorPopup():

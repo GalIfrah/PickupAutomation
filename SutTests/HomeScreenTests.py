@@ -81,4 +81,22 @@ class HomeScreenTestsClass(BasicTestClass, unittest.TestCase):
 
             expected_footer_text = config['HOME_PAGE']['TEXTS']['FOOTER_FIRST_PART_TEXT']
 
-            self.assertEqual(current_footer_text, expected_footer_text, ErrorsHandler.TEXT_IS_WRONG)
+            assert current_footer_text == expected_footer_text, ErrorsHandler.TEXT_IS_WRONG
+
+        def test_107_startOrderWithValidLocation(self):
+
+            HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
+
+            current_url = GenericPO.webDriver.getCurrentUrl()
+
+            assert current_url == config['MENU']['LOCATORS']['MENU_URL'], \
+                ErrorsHandler.CAN_NOT_START_ORDER
+
+        def test_108_locationWithNoTimes(self):
+
+            HomePage.startOrder(config['HOME_PAGE']['DATA']['NOT_WORKING_LOCATION'])
+
+            pop_up_text = HomePage.getStartOrderPopup().text
+
+            assert pop_up_text == config['HOME_PAGE']['TEXTS']['START_ORDER_SELECT_TIME_POPUP_TEXT'], \
+                ErrorsHandler.START_ORDER_WITH_NO_TIMES

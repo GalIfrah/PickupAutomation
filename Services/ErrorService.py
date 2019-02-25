@@ -19,7 +19,10 @@ class ErrorsHandler(object):
 
 
     # CHOOSE LOCATION ERRORS
+    TEST_LOCATION_DOES_PNOT_EXIST = "test business doesn't exist on locations list"
     LOCATION_CHOOSING_ERRORS = 'there was an error with choosing the location...please see the error msg text on the html reporting'
+    START_ORDER_WITH_NO_TIMES = "manage to start order with no times"
+    CAN_NOT_START_ORDER = "failed to start order with valid location - menu url not found"
 
     # WALLET ERRORS
     ADD_PAYMENT_ERROR = 'error while adding the credit card'

@@ -1,7 +1,9 @@
-{ "APP_NAME": "Franco Manca",
+{
+  "APP_NAME": "TRG",
 
-  "SUT": {"TEST": "https://order-test.mycheckapp.com/?appId=ad53e060a6305eafda0d59f5120e7a60#",
-          "PROD": "https://order.francomanca.co.uk/"
+  "SUT": {
+          "TEST": "https://order-test.mycheckapp.com/?appId=1ed0827438f13115fd6dccc0d7d647ac#",
+          "PROD": "https://order.meatliquor.com/"
   },
 
 
@@ -10,9 +12,9 @@
 
                 "LOCATORS": {
                               "COOKIES_POLICY_BTN": "//div[@class='continue ng-binding']",
-                              "BACK_TO_APP_HEADER_LINK": "//div[@class='back-to-site-msg ng-binding']/a[@href='http://www.francomanca.co.uk/']",
+                              "BACK_TO_APP_HEADER_LINK": 0,
                               "CONNECT_BTN": "login-btn",
-                              "CONNECT_BTN_TEXT_AREA": "//div[@class='has-menu']",
+                              "CONNECT_BTN_TEXT_AREA": "//div[@id='login-btn']/span",
                               "START_ORDER_BUTTON": "//div/button[@class='button button-block start-order ng-binding']",
                               "START_ORDER_POPUP_TEXT_AREA": "//div[@class='popup-body']",
                               "START_ORDER_POPUP_BUTTON": "//div/button[@class='button ng-binding app-bg-color no-border']",
@@ -34,34 +36,32 @@
                                           "GIFT_CARDS": "//ul/li[@class='profile-item ng-binding ng-scope gift-card']",
                                           "HISTORY": "//ul/li[@class='profile-item ng-binding ng-scope history']",
                                           "LOG_OUT": "//ul/li[@class='profile-item ng-binding ng-scope logout']"
+
                   }
 
                 },
 
                 "DATA": {
-                         "TEST_BUSINESS": "fm2",
-                         "NOT_WORKING_LOCATION": "AireusTest",
-                         "SECOND_LOCATION": "fm2",
-                         "FULL_LOCATIONS_NAMES": ["Please select a location", "AireusTest", "fm2"],
-                         "DATE": "Today only",
-                         "TOMORROW": "Tomorrow",
+                         "TEST_BUSINESS": "RealG3_real_6",
+                         "FIRST_LOCATION_NOT_WORKING": "Aireus Lab",
+                         "SECOND_LOCATION": "RealG3_real_6",
+                         "DATE": "Tomorrow",
                          "TIME": "14:20"
                 },
 
                 "TEXTS": {
                           "CONNECT_BUTTON_BEFORE_LOGIN": "Connect",
-                          "BACK_TO_APP_HEADER_LINK_TEXT": "francomanca.co.uk",
-                          "FOOTER_FIRST_PART_TEXT": "FIND YOUR RESTAURANT",
-                          "FOOTER_SECOND_PART_TEXT": "SELECT YOUR FOOD",
-                          "FOOTER_THIRD_PART_TEXT": "PICK UP & ENJOY",
+                          "BACK_TO_APP_HEADER_LINK_TEXT": "francomanca.co.ukk",
+                          "FOOTER_FIRST_PART_TEXT": "1. find your restaurant",
+                          "FOOTER_SECOND_PART_TEXT": "2. Select your food",
+                          "FOOTER_THIRD_PART_TEXT": "3. pick up & enjoy",
                           "SELECT_LOCATION_PLACE_HOLDER_TEXT": "Please select a location",
                           "SELECT_DATE_PLACE_HOLDER_TEXT": "Date",
-                          "SELECT_TIME_PLACE_HOLDER_TEXT": "Collection time",
+                          "SELECT_TIME_PLACE_HOLDER_TEXT": "Time",
                           "START_ORDER_CHOOSE_LOCATION_POPUP_TEXT": "Please select a location",
                           "START_ORDER_TIME_EXCEEDED_POPUP_TEXT": "",
-                          "START_ORDER_NOT_ACCEPTING_POPUP_TEXT": "Ouch! This restaurant is currently not accepting online orders. Please call us on .",
+                          "START_ORDER_NOT_ACCEPTING_POPUP_TEXT": "This location is currently not accepting orders for pickup. Please dine in.",
                           "START_ORDER_SELECT_TIME_POPUP_TEXT": "Please Select Time"
-
 
                 }
 
@@ -90,8 +90,8 @@
   "HISTORY_SCREEN": {
 
                             "LOCATORS": {
-                                         "HISTORY_ORDERS_LIST": "//table/tbody/tr[@ng-repeat='order in OrderList.Orders']",
-                                         "FIRST_ORDER_PRICE": "//table/tbody/tr[@ng-repeat='order in OrderList.Orders']/td[3]"
+                                          "HISTORY_ORDERS_LIST": "//table/tbody/tr[@ng-repeat='order in OrderList.Orders']",
+                                          "FIRST_ORDER_PRICE": "//table/tbody/tr[@ng-repeat='order in OrderList.Orders']/td[3]"
                             },
 
                             "DATA":{}
@@ -107,7 +107,7 @@
 
 
 
-   "LOGOUT_SCREEN": {
+  "LOGOUT_SCREEN": {
                      "YES_BTN": "//popup[@class='popup-wrapper ng-scope']/form/div/div/div[3]/button[1]",
                      "NO_BTN": "//popup[@class='popup-wrapper ng-scope']/form/div/div/div[3]/div"
 
@@ -118,28 +118,25 @@
   "ENTER_PHONE_PAGE" :
 
                        {"LOCATORS" : {"PHONE_FIELD" : "//input[@name='phone']",
-                                      "SUBMIT_BUTTON" : "/html/body/div[1]/div/div/div/div/div[2]/div/ng-include/div/div[2]/form/div[1]/div[2]",
+                                      "SUBMIT_BUTTON" : "//div[@class='submit-btn']",
                                       "ENTER_SMS_CODE" : "//form[@name='verifyCodeForm']/div/div/input[@maxlength='6']",
                                       "SUBMIT_SMS_CODE" : "//form/div/div/div",
                                       "SCREEN_POPUP": "//div[@class='popup']",
                                       "SCREEN_POPUP_BODY": "//div[@class='popup']/div[@class='popup-body']",
                                       "SCREEN_POPUP_OK": "//div[@class='popup']/div[@class='popup-buttons']/button",
-                                      "RESEND_CODE": "//div[@class='resend-code row']/a",
-                                      "z": "//form/div[2]"
+                                      "RESEND_CODE": "//div[@class='resend-code row']/a"
 
-                       }, "DATA" : {
-                                    "VALID_PHONE_NUMBER" : "+972542567405",
+                       }, "DATA" : {"VALID_PHONE_NUMBER" : "+972542567405",
                                     "INVALID_PHONE_NUMBER" : "+9725425675555",
                                     "INVALID_SMS_CODE" : "000000"
                                    },
+
                        "TEXTS" : {
                                      "INVALID_PHONE_POPUP_TEXT": "Please enter a valid phone number",
                                      "WRONG_SMS_POPUP_TEXT": "Invalid verification code",
-                                     "RESEND_CODE_POPUP_TEXT": "SMS verification was sent.",
-                                     "WHY_TO_USE_PHONE_TEXT": "We use your mobile phone number to improve security of your account. Please enter your mobile phone number to log in or, if you are a new customer, begin the registration process. You will receive a SMS text from our provider MyCheck with a 6-digit verification code which you will need to enter on the next screen."
+                                     "RESEND_CODE_POPUP_TEXT": "SMS verification was sent."
                        }
-
-  },
+                       },
 
 
 
@@ -158,12 +155,12 @@
 
   "FORM_PAGE": {
                 "LOCATORS" : {
-                  "FORM_EMAIL_FIELD": "",
-                  "FORM_FULL_NAME_FIELD": "//div[@class='col-12']/input[@placeholder='Full Name']",
-                  "FORM_PIN_FIELD": "//div[@class='relative-wrapper']/input[@placeholder='Choose your own 4 digit passcode']",
-                  "FORM_DATE_FIELD": "//div[@class='row form-element'][4]/div/input",
-                  "FORM_OPTIN_TRUE": "/html/body/div[1]/div/div/div/div/div[2]/div/ng-include/div/div/form/div[5]/div/label",
-                  "FORM_SUBMIT_BUTTON": "//div[@class='continue-btn item-input-disable ng-binding']"
+                               "FORM_EMAIL_FIELD": "",
+                               "FORM_FULL_NAME_FIELD": "//div[@class='col-12']/input[@placeholder='Full Name']",
+                               "FORM_PIN_FIELD": "//div[@class='relative-wrapper']/input[@placeholder='Choose your own 4 digit passcode']",
+                               "FORM_DATE_FIELD": "//div[@class='row form-element'][4]/div/input",
+                               "FORM_OPTIN_TRUE": "/html/body/div[1]/div/div/div/div/div[2]/div/ng-include/div/div/form/div[5]/div/label",
+                               "FORM_SUBMIT_BUTTON": "//div[@class='continue-btn item-input-disable ng-binding']"
                 },
 
                 "DATA" : {"NAME" : "test tester",
@@ -178,20 +175,20 @@
 
                "LOCATORS" : {
                               "WALLET_HEADER": "//div[@class='myc-wallet-inner myc-wallet-payment-modal'] /div/p[@class='myc-header']",
-                              "CC_VALUES_IFRAME": "//*[@id='myc-wallet-modal-outer']/div[1]/div[2]/div[1]/div[1]/iframe",
-                              "ADD_NEW_CARD_BUTTON": "//div[@class='myc-wallet-inner myc-wallet-payment-modal']/div[2]/div[1]/div[2]/ul/li[@class='add-new-card']",
-                              "ADD_NEW_CARD_BUTTON_HEADER": 0,
+                              "CC_VALUES_IFRAME": "//*[@id='myc-wallet-modal-outer']/div[1]/div[2]/div/div/iframe",
+                              "ADD_NEW_CARD_BUTTON": "//div[@class='myc-wallet-inner myc-wallet-payment-modal']/div[2]/div/div/div/ul/li[@class='myc-sliding-card myc-add-new-card']",
+                              "ADD_NEW_CARD_BUTTON_HEADER": "//*[@id='myc-wallet-modal-outer']/div[1]/div[2]/div[1]/div/button",
                               "CC_NUMBER_INPUT": "creditNumber",
                               "EXP_DATE_INPUT": "fullYear",
                               "CVC_INPUT": "cvc",
                               "POSTCODE_INPUT": "postalCode",
                               "APPLY_BUTTON": "submit",
                               "CANCEL_BUTTON": "cancel",
-                              "CARDS_SECTION": "//div[@class='myc-wallet-inner myc-wallet-payment-modal']/div[2]/div[1]/div[2]/ul[@class='myc-modal-payment-list']",
+                              "CARDS_SECTION": "//ul[@class='myc-sliding-cards-list myc-sliding-cards-list--centered']",
                               "USER_CARDS": "li",
-                              "DEFAULT_CARD_V_MARK": "//ul/li[@class='myc-card is-default']/div[@class='myc-default']",
+                              "DEFAULT_CARD_V_MARK": "//ul/li[@class='myc-sliding-card is-default']/div[@class='myc-sliding-card-default']",
                               "DELETE_CARD_POPUP": "//div[@class='myc-popup active']/div",
-                              "DELETE_CARD_BUTTON": "//div[@class='myc-modal-list-wrapper']/ul/li[2]/div/div[@class='delete-hidden-circle']",
+                              "DELETE_CARD_BUTTON": "//ul/li/button[@class='myc-sliding-card__delete-button']",
                               "DELETE_CARD_YES_BUTTON": "//div[@class='myc-popup active']/div/div/span[2]",
                               "DELETE_CARD_NO_BUTTON": "//div[@class='myc-popup active']/div/div/span[1]",
                               "ACCEPTED_CARDS_TEXT_AREA": "//div[@class='myc-wallet-modal-footer']/div/div/span[@class='myc-sep-title']",
@@ -222,13 +219,15 @@
                },
 
                "TEXTS": {
-                         "WALLET_HEADER_TEXT": "MANAGE PAYMENT METHODS",
+                         "WALLET_HEADER_TEXT": "PAYMENT METHODS",
                          "APPLY_BUTTON_TEXT": "APPLY",
                          "CANCEL_BUTTON_TEXT": "CANCEL",
-                         "DEFAULT_CARD_TEXT": "XXXX-1111\n12/20",
-                         "ADD_NEW_CARD_TEXT": "ADD NEW CARD",
-                         "ACCEPTED_CARDS_TEXT": "CARD ACCEPTED",
-                         "PCI_FOOTER_TEXT": "Our provider Mycheck is secured to PCI-DSS Level 1 compliance"
+                         "DEFAULT_CARD_TEXT": "xxxx-1111\n12/20",
+                         "ADD_NEW_CARD_TEXT": "Add New Card",
+                         "ACCEPTED_CARDS_TEXT": "We Accept",
+                         "PCI_FOOTER_TEXT": "We are secure with PCI-DSS level 1"
+
+
                }
 
   },
@@ -236,66 +235,67 @@
 
 
   "MENU": {
-            "LOCATORS": {
-                         "MENU_URL" : "https://order-test.mycheckapp.com/?appId=ad53e060a6305eafda0d59f5120e7a60#/store",
-                         "FIRST_CATEGORY": "//*[@id='store-cg-title']/div[2]/nav/ul/li[1]/a[text()='Pizzas']",
-                         "SECOND_CATEGORY": "//*[@id='store-cg-title']/div[2]/nav/ul/li[2]/a[text()='Bites']",
-                         "SECOND_CATEGORY_ACTIVE": "//*[@id='store-cg-title']/div[2]/nav/ul/li[2][@class='category-item ng-scope active']",
-                         "MODIFIER_MODAL": "//div[@class='modal-body item-page has-footer ng-scope']",
+           "LOCATORS": {
+                        "MENU_URL" : "https://order-test.mycheckapp.com/?appId=1ed0827438f13115fd6dccc0d7d647ac#/store",
+                        "FIRST_CATEGORY": "//div[@id='store-cg-title']/div/nav/ul/li/a[1]",
+                        "FIRST_ITEM" : "//dt[@title='Hera-Chicken gf']",
+                        "SECOND_ITEM" : "//*[@id='store-cg-body']/section/div/div/div[2]/ul[2]/li[2]/a/dl/dt",
+                        "CART_SECOND_ITEM_TEXT": "//table[@class='cart ng-scope']/tbody/tr[1]/td[2]/dl/dt",
+                        "UP_SALE_ITEM": 0,
+                        "UP_SALE_POPUP_BODY": "",
+                        "SECOND_CATEGORY": "//div[@id='store-cg-title']/div/nav/ul/li/a[text()='Classic Box']",
+                        "SECOND_CATEGORY_ACTIVE": "//*[@id='store-cg-title']/div[2]/nav/ul/li[2][@class='category-item ng-scope active']",
+                        "MODIFIER_MODAL": "//div[@class='modal-body item-page has-footer ng-scope']",
                          "MODIFIER_MODAL_HEADER": "//div[@class='modal-body item-page has-footer ng-scope']/div[@class='item-header text-display']/article/section/div[@class='name ng-binding']",
-                         "FIRST_CATEGORY_MODIFIERS": "//ul[@data-name='Options ']/li",
-                         "SECOND_CATEGORY_MODIFIERS": "//ul[@data-name='Extras (Choose max. 3)']/li",
-                         "ACTIVE_MODIFIER": "//ul[@data-name='Extras (Choose max. 3)']/li/div/input[@class='ng-untouched ng-valid ng-scope ng-not-empty ng-dirty ng-valid-parse']",
-                         "CLOSE_MODIFIER_X_BUTTON": "/html/body/div[1]/div/div/div[2]",
-                         "FIRST_ITEM": "//dt[@title='Tomato, Garlic, Oregano & Basil']",
-                         "SECOND_ITEM": "//dt[@title='Tomato, Mozzarella, Basil']",
-                         "CART_SECOND_ITEM_TEXT": "//table[@class='cart ng-scope']/tbody/tr[1]/td[2]/dl/dt",
-                         "UP_SALE_ITEM": "//dt[@title='Roasted Courgettes, Goat and Sheep Ricotta, Franco & Cantarelli Grana & Mozzarella (No Tomato Base)']",
-                         "UP_SALE_POPUP_BODY": "//div[@class='popup']/div[@class='popup-body']/div/p",
-                         "EDIT_ITEM_BUTTON": "//ul[@class='menu-item-list']/li[2]/ul/li[@class='edit']",
-                         "CART_ITEMS_CONTAINER": "//table[@class='cart ng-scope']/tbody/tr",
-                         "MENU_TOAST": "//div[@id='toast-container']",
-                         "CART_TOTAL": "//*[@id='cart-page']/div[3]/div[1]/dl[5]/dd",
-                         "EDIT_ITEM_FROM_CART": "//table[@class='cart ng-scope']/tbody/tr/td[2]/ul/li/a[text()='Edit item']",
-                         "DELETE_ITEM_FROM_CART": "//table[@class='cart ng-scope']/tbody/tr/td[2]/ul/li/a[text()='Delete']",
-                         "PROCEED_TO_CHECKOUT_BUTTON" : "//button[@class='button button-block ng-binding']",
+                        "FIRST_CATEGORY_MODIFIERS": "",
+                        "SECOND_CATEGORY_MODIFIERS": "",
+                        "ACTIVE_MODIFIER": "",
+                        "CLOSE_MODIFIER_X_BUTTON": "/html/body/div[1]/div/div/div[2]",
+                        "EDIT_ITEM_BUTTON": "//ul[@class='menu-item-list']/li[2]/ul/li[@class='edit']",
+                        "CART_ITEMS_CONTAINER": "//table[@class='cart ng-scope']/tbody/tr",
+                        "MENU_TOAST": "//div[@id='toast-container']",
+                        "CART_TOTAL": "//*[@id='cart-page']/div[3]/div[1]/dl[5]/dd",
+                        "EDIT_ITEM_FROM_CART": 0,
+                        "DELETE_ITEM_FROM_CART": "//table[@class='cart ng-scope']/tbody/tr/td[2]/ul/li/a[text()='Delete']",
+                        "PROCEED_TO_CHECKOUT_BUTTON" : "//button[@class='button button-block ng-binding']",
                          "MOBILE_CART_ICON": "//*[@id='store-cg-body']/section/div/div/div[1]/div",
-                         "SCREEN_POPUP": "//div[@class='popup']",
-                         "SCREEN_POPUP_HEADER": "//div[@class='popup']/div[@class='popup-head']",
-                         "SCREEN_POPUP_BODY": "//div[@class='popup']/div[@class='popup-body']",
-                         "SCREEN_POPUP_OK": "//div[@class='popup']/div[@class='popup-buttons']/button"
+                        "SCREEN_POPUP": "//div[@class='popup']",
+                        "SCREEN_POPUP_HEADER": "//div[@class='popup']/div[@class='popup-head']",
+                        "SCREEN_POPUP_BODY": "//div[@class='popup']/div[@class='popup-body']",
+                        "SCREEN_POPUP_OK": "//div[@class='popup']/div[@class='popup-buttons']/button"
             },
 
-            "TEXTS": {
+           "TEXTS": {
                       "MORE_THEN_6_POP_UP_TEXT": "For more than 6 Pizzas, please ring the restaurant directly!",
                       "ALCOHOL_RESTRICTION_HEADER_TEXT": "Are you over 18?",
                       "ALCOHOL_RESTRICTION_BODY_TEXT": "If you are lucky enough to look under 25 please bring ID as we may need to ask to see it",
                       "UP_SALE_POPUP_TEXT": "Some people prefer this pizza with our tomato sauce.\nAdd Tomato?"
             },
 
-            "DATA": {
-                     "AMOUNT_LIMIT": 1,
+           "DATA": {
+                     "AMOUNT_LIMIT": 0,
                      "AMOUNT_LIMIT_NUMBER": 6,
-                     "AGE_LIMIT": 1,
-                     "AGE_RESTRICTED_CATEGORY": "//*[@id='store-cg-title']/div[2]/nav/ul/li/a[text()='Wine & Beer']",
-                     "AGE_PASSING_INDICATOR": "//a/dl/dt[text()='No Logo Pale Ale']",
-                     "MODIFIERS": 1,
-                     "FIRST_CATEGORY_MODIFIERS_LIMIT": 1,
-                     "SECOND_CATEGORY_MODIFIERS_LIMIT": 3
+                     "AGE_LIMIT": 0,
+                     "AGE_RESTRICTED_CATEGORY": "",
+                     "AGE_PASSING_INDICATOR": "",
+                     "MODIFIERS": 0,
+                     "FIRST_CATEGORY_MODIFIERS_LIMIT": 0,
+                     "SECOND_CATEGORY_MODIFIERS_LIMIT": 0
 
-            }
-
-          },
+           }
+   },
 
 
 
   "CHECKOUT_SCREEN": {
                        "LOCATORS": {
                                      "SUBMIT_ORDER_BUTTON": "//div[@class='modal checkout-modal fade ng-scope ng-isolate-scope in']/div/div/div[3]/button",
-                                     "CHECKOUT_POPUP": "//div[@class='popup']/div[2]",
                                      "ENTER_PIN_INPUT": "//div[@class='popup']/div[2]/input",
-                                     "POPUP_OK_BTN": "//div[@class='popup']/div[3]/button",
+                                     "ENTER_PIN_OK_BUTTON": "//div[@class='popup']/div[3]/button",
                                      "ENTER_PIN_CANCEL_BUTTON": "",
+                                     "POPUP_OK_BTN": "//div[@class='popup']/div[3]/button",
+                                     "ERROR_POPUP": "//popup[@class='popup-wrapper ng-scope']/form/div/div/div[2]" ,
+                                     "CHECKOUT_POPUP": "//div[@class='popup']/div[2]",
                                      "MANAGE_PAYMENT_METHOD": "//div[@class='add-payment-method ng-binding ng-scope']"
 
                                    },
@@ -309,7 +309,7 @@
                                 },
 
                        "DATA": {
-                                "4_DIGIT_EXIST": 1
+                                "4_DIGIT_EXIST": 0
                        }
   },
 
@@ -317,11 +317,10 @@
 
   "CONFIRMATION_SCREEN": {
                            "LOCATORS": {
-                                         "CONFIRMATION_TEXT_AREA": "//*[@id='confirmation-page']/div/header-widget/div[1]",
-                                         "DONE_BUTTON": "/html/body/div[1]/div/div/div[2]/div/div[@class='col-1-1 button app-bg-color button-next ng-binding']",
-                                         "SUBTOTAL": "//*[@id='confirmation-page']/div/ion-content/div[@class='content-group padding payment-details-content']/div/div[2]",
-                                         "TOTAL": "//*[@id='confirmation-page']/div/ion-content/div[@class='content-group padding payment-details-content']/div[4]/div/div[2]"
-
+                             "CONFIRMATION_TEXT_AREA": "//*[@id='confirmation-page']/div/header-widget/div[1]",
+                             "DONE_BUTTON": "//div[@class='modal-content']/div[2]/div/div",
+                             "SUBTOTAL": "//*[@id='confirmation-page']/div/ion-content/div[@class='content-group padding payment-details-content']/div/div[2]",
+                             "TOTAL": "//*[@id='confirmation-page']/div/ion-content/div[@class='content-group padding payment-details-content']/div[4]/div/div[2]"
                            },
 
                            "TEXTS": {
@@ -334,9 +333,14 @@
 
                            }
 
+                           }
+
+
   }
 
 
 
 
-}
+
+
+

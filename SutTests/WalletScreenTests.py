@@ -151,63 +151,56 @@ class WalletTestsClass(BasicTestClass, unittest.TestCase):
 
         Account.clickOnPaymentMethods()
 
-        walletHeader = Wallet.getWalletHeader()
+        wallet_header = Wallet.getWalletHeader()
 
-        self.assertEqual(walletHeader, params['WALLET']['TEXTS']['WALLET_HEADER_TEXT'], "WALLET_HEADERS_NOT_EQUALS")
+        assert wallet_header == config['WALLET']['TEXTS']['WALLET_HEADER_TEXT'], "WALLET_HEADERS_NOT_EQUALS"
 
     def test_110_checkWeAcceptText(self):
 
-        HomePage.openSut()
-
         Connect.login()
 
         Account.clickOnPaymentMethods()
 
-        weAcceptedCardText = Wallet.getWeAcceptCardsText()
+        we_accepted_card_text = Wallet.getWeAcceptCardsText()
 
-        self.assertEqual(weAcceptedCardText, params['WALLET']['TEXTS']['ACCEPTED_CARDS_TEXT'],
-                         "WE_ACCEPT_TEXT_IS_WRONG")
+        assert we_accepted_card_text == config['WALLET']['TEXTS']['ACCEPTED_CARDS_TEXT'], "WE_ACCEPT_TEXT_IS_WRONG"
 
     def test_111_checkSupportedCardsImages(self):
 
-        HomePage.openSut()
-
         Connect.login()
 
         Account.clickOnPaymentMethods()
 
-        acceptedCards = GenericPO.webDriver.remoteWebDriver.find_elements_by_xpath(
-            params['WALLET']['LOCATORS']['WALLET_ACCEPTED_CARDS_AREA'])
+        accepted_cards = GenericPO.webDriver.remoteWebDriver.find_elements_by_xpath(
+            config['WALLET']['LOCATORS']['WALLET_ACCEPTED_CARDS_AREA'])
 
-        acceptedCardsLen = len(acceptedCards)
+        accepted_cards_len = len(accepted_cards)
 
-        self.assertEqual(acceptedCardsLen, 4, ErrorsHandler.MISSING_SUPPORTED_CARDS)
+        assert accepted_cards_len == 4, ErrorsHandler.MISSING_SUPPORTED_CARDS
 
-        acceptedCardsUrl = []
+        accepted_cards_url = []
 
-        words = ["visa", "amex", "maestro", "mastercard"]
+        cards_name = ["visa", "amex", "maestro", "mastercard"]
 
-        for card in acceptedCards:
-            acceptedCardsUrl.append(card.get_attribute('src'))
+        for card in accepted_cards:
+            accepted_cards_url.append(card.get_attribute('src'))
 
         i = 0
 
-        for word in words:
-            print(acceptedCardsUrl[i])
-            self.assertTrue(word in acceptedCardsUrl[i], 'word not exist')
+        for word in cards_name:
+            print(accepted_cards_url[i])
+            assert word in accepted_cards_url[i] is True, 'word not exist'
             i += 1
 
     def test_112_checkFooterText(self):
 
-        HomePage.openSut()
-
         Connect.login()
 
         Account.clickOnPaymentMethods()
 
-        pciFooterText = Wallet.getPciFooterText()
+        pci_footer_text = Wallet.getPciFooterText()
 
-        self.assertEqual(pciFooterText, params['WALLET']['TEXTS']['PCI_FOOTER_TEXT'], ErrorsHandler.TEXT_IS_WRONG)
+        assert pci_footer_text == config['WALLET']['TEXTS']['PCI_FOOTER_TEXT'], ErrorsHandler.TEXT_IS_WRONG
 
     def test_113_checkAddCardInputsHeaders(self):
         pass
