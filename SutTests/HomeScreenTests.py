@@ -1,4 +1,3 @@
-# from SutTests.TestsClassesInit import *
 import unittest
 from App import PageObjects
 from App.PageObjects import *
@@ -13,15 +12,17 @@ class HomeScreenTestsClass(BasicTestClass, unittest.TestCase):
 
             current_app_link = HomePage.getSutUrl()
 
-            if BasicTestClass.env == 'test':
+            if self.env == 'test':
 
                 expected_app_url = config['SUT']['TEST']
 
-            elif BasicTestClass.env == 'prod':
+            elif self.env == 'prod':
 
                 expected_app_url = config['SUT']['PROD']
+
             HomePage.clickOnCookPolicyBtn()
-            assert current_app_link == expected_app_url
+
+            assert current_app_link == expected_app_url + "s", ErrorsHandler.WRONG_ENVIRONMENT + self.env
 
         @unittest.skipIf(config['HOME_PAGE']['LOCATORS']['BACK_TO_APP_HEADER_LINK'] == 0,
                          reason=ErrorsHandler.FEATURE_NOT_EXIST_ON_APP)
@@ -50,7 +51,7 @@ class HomeScreenTestsClass(BasicTestClass, unittest.TestCase):
 
             HomePage.clickOnCookPolicyBtn()
 
-            HomePage.chooseLocation()
+            HomePage.chooseLocation(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
         def test_104_checkLocationList(self):
 
@@ -61,6 +62,7 @@ class HomeScreenTestsClass(BasicTestClass, unittest.TestCase):
             expected_location_number = 0
 
             for location in locations_list:
+
                 assert location.text == config['HOME_PAGE']['DATA']['FULL_LOCATIONS_NAMES'][expected_location_number]
 
                 expected_location_number += 1
@@ -100,3 +102,37 @@ class HomeScreenTestsClass(BasicTestClass, unittest.TestCase):
 
             assert pop_up_text == config['HOME_PAGE']['TEXTS']['START_ORDER_SELECT_TIME_POPUP_TEXT'], \
                 ErrorsHandler.START_ORDER_WITH_NO_TIMES
+
+        def test_109_logoOrderText(self):
+            logo_order_text = HomePage.getLogoOrderText()
+
+            assert logo_order_text == config['HOME_PAGE']['TEXTS']['LOGO_TEXT_ORDER_TEXT'], ErrorsHandler.TEXT_IS_WRONG
+
+        def test_110_suportText(self):
+
+            HomePage.clickOnCookPolicyBtn()
+
+            support_test = HomePage.getSupportText()
+
+            assert support_test == 'Ordering for a large group or just feeling hungry?' + "For more than 6 pizzas, please contact the restaurant directly.", ErrorsHandler.TEXT_IS_WRONG
+
+
+        @pytest.mark.skipif(condition=config['HOME_PAGE']['DATA']['HAS_DATES_LIMIT'] is not True, reason=ErrorsHandler.FEATURE_NOT_EXIST_ON_APP)
+        def test_111_datesLimit(self):
+
+            HomePage.chooseLocation(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
+
+            dates_list = HomePage.getDatesList()
+
+            dates_values = []
+
+            for date in dates_list:
+
+                dates_values.append(date.text)
+
+            if config['HOME_PAGE']['DATA']['HAS_DATES_LIMIT'] == 1:
+
+                assert len(dates_values) == config['HOME_PAGE']['DATA']['DATES_LIMIT_NUMBER'], ErrorsHandler.ABOVE_DATES_LIMIT
+
+                assert dates_values[0] == config['HOME_PAGE']['DATA']['DATES_LIMIT_VALUE'], ErrorsHandler.DATE_ON_LIST_IS_WRONG
+

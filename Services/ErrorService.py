@@ -7,6 +7,7 @@ class ErrorsHandler(object):
     SUCCESS = 'success'
     TIMEOUT_ERROR = 'time out error'
     FEATURE_NOT_EXIST_ON_APP = "the specific feature doesn't exist on current app"
+    WRONG_ENVIRONMENT = "the url doesnt belong to environment - "
 
 
     # TEXT ERRORS
@@ -22,7 +23,9 @@ class ErrorsHandler(object):
     TEST_LOCATION_DOES_PNOT_EXIST = "test business doesn't exist on locations list"
     LOCATION_CHOOSING_ERRORS = 'there was an error with choosing the location...please see the error msg text on the html reporting'
     START_ORDER_WITH_NO_TIMES = "manage to start order with no times"
-    CAN_NOT_START_ORDER = "failed to start order with valid location - menu url not found"
+    CAN_NOT_START_ORDER = "failed to start order with valid location - menu url not found",
+    ABOVE_DATES_LIMIT = "there is to many dates on drop down for that client"
+    DATE_ON_LIST_IS_WRONG = "the date you are looking for isn't exist on list or not in the right index."
 
     # WALLET ERRORS
     ADD_PAYMENT_ERROR = 'error while adding the credit card'

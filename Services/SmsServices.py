@@ -40,7 +40,7 @@ class SmsService(GenericPO):
     @staticmethod
     def getSmsCode():
 
-        time.sleep(6)
+        time.sleep(10)
 
         GenericPO.webDriver.findElementBy(PHONE_NUMBER_BUTTON, By.XPATH).click()
 

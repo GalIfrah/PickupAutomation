@@ -5,30 +5,26 @@ import requests
 from Crypto.Cipher import AES
 from App.PageObjects import *
 
-
 USERS_ENDPOINT = "https://the-test.mycheckapp.com/users"
 AUDIENCE = "TEST"
 GET_VERIFY_CODE_BY_PSW = "KRJfHeXpKIXksryv51wkYjYwOxEuWAv5/QGy8F10UL0="
 
 
-def sendSMS():
+def sendSMS(phone, publishable_key):
+    request = {
 
-   request = {
+        "phone": phone,
+        "publishableKey": publishable_key
+    }
 
-       "phone": "+972542567405",
-       "publishableKey": "pk_xb0tQerFtExKhYLbUMz8bkhhlpkuL"
-   }
+    response = requests.post(USERS_ENDPOINT + '/api/v1/user/metadata/guest', data=request)
 
-   response = requests.post(USERS_ENDPOINT + '/api/v1/user/metadata/guest', data=request)
+    verify_token = response.json()
 
-   verifyToken = response.json()
-
-   return verifyToken['tokens']['phone']
-
+    return verify_token['tokens']['phone']
 
 
 def decodeSmsCode(verify_token):
-
     token = jwt.decode(verify_token, 'example_key', audience=AUDIENCE, algorithms=['HS256'])
 
     print(token)

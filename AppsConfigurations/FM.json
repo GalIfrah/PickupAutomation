@@ -14,7 +14,9 @@
                               "CONNECT_BTN": "login-btn",
                               "CONNECT_BTN_TEXT_AREA": "//div[@class='has-menu']",
                               "START_ORDER_BUTTON": "//div/button[@class='button button-block start-order ng-binding']",
+                              "HOME_SUPPORT_TEXT_AREA": "//span[@class='ng-scope']",
                               "START_ORDER_POPUP_TEXT_AREA": "//div[@class='popup-body']",
+                              "LOGO_TEXT_ORDER_TEXT_AREA": "//div[@class='start-order-title ng-binding']",
                               "START_ORDER_POPUP_BUTTON": "//div/button[@class='button ng-binding app-bg-color no-border']",
                               "TERMS_AND_COND_LINK": "//span[@class='small ng-scope']/a[1]",
                               "PRIVACY_POLICY_LINK": "//span[@class='small ng-scope']/a[2]",
@@ -45,7 +47,10 @@
                          "FULL_LOCATIONS_NAMES": ["Please select a location", "AireusTest", "fm2"],
                          "DATE": "Today only",
                          "TOMORROW": "Tomorrow",
-                         "TIME": "14:20"
+                         "TIME": "14:20",
+                         "HAS_DATES_LIMIT": true,
+                         "DATES_LIMIT_NUMBER": 1,
+                         "DATES_LIMIT_VALUE": "Today only"
                 },
 
                 "TEXTS": {
@@ -60,9 +65,9 @@
                           "START_ORDER_CHOOSE_LOCATION_POPUP_TEXT": "Please select a location",
                           "START_ORDER_TIME_EXCEEDED_POPUP_TEXT": "",
                           "START_ORDER_NOT_ACCEPTING_POPUP_TEXT": "Ouch! This restaurant is currently not accepting online orders. Please call us on .",
-                          "START_ORDER_SELECT_TIME_POPUP_TEXT": "Please Select Time"
-
-
+                          "START_ORDER_SELECT_TIME_POPUP_TEXT": "Please Select Time",
+                          "LOGO_TEXT_ORDER_TEXT": "Order & Collect",
+                          "HOME_SUPPORT_TEXT": ""
                 }
 
   },
@@ -72,6 +77,7 @@
   "PERSONAL_INFO_SCREEN": {
 
                             "LOCATORS": {
+                                          "PERSONAL_INFO_MODAL": "//div[@class='modal modal-account fade ng-scope ng-isolate-scope in']",
                                           "NAME_FIELD": "",
                                           "DOB_FIELD": "",
                                           "EMAIL_FIELD": ""
