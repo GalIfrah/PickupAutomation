@@ -13,7 +13,7 @@ from Infrastructure.BasicTest import BasicTestClass
 def driver_init(request, env):
 
     # from selenium import webdriver
-    desired_caps = {'platform': 'Linux', 'browserName': 'chrome'}
+    desired_caps = {'platform': 'Mac', 'browserName': 'chrome'}
 
     global web_driver
 
