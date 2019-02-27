@@ -1,12 +1,12 @@
 import time
-
 import pytest
 from selenium import webdriver
 from pytest_testconfig import config
-
-web_driver = None
 from Infrastructure.WebDriverWrapper import Wrapper
 from Infrastructure.BasicTest import BasicTestClass
+
+
+web_driver = None
 
 
 @pytest.fixture(scope="function")
@@ -21,13 +21,11 @@ def driver_init(request, env):
 
         web_driver = webdriver.Remote("http://localhost:4444/wd/hub", desired_caps)
         Wrapper.driver = web_driver
-        BasicTestClass.env = env
 
     elif web_driver is not None:
 
         web_driver = webdriver.Remote("http://localhost:4444/wd/hub", desired_caps)
         Wrapper.driver = web_driver
-        BasicTestClass.env = env
 
     web_driver.maximize_window()
 
@@ -39,6 +37,10 @@ def driver_init(request, env):
 
     if env == 'prod':
         web_driver.get(config['SUT']['PROD'])
+
+    request.cls.env = env
+
+    request.cls.platform = platform
 
     request.cls.driver = web_driver
 

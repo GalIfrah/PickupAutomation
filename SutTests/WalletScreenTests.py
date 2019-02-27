@@ -1,8 +1,5 @@
-# from SutTests.TestsClassesInit import *
 import unittest
-
 import pytest
-
 from App import PageObjects
 from App.PageObjects import *
 from Infrastructure.BasicTest import BasicTestClass

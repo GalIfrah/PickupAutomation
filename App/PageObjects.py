@@ -1,3 +1,4 @@
+import pytest
 from _pytest import config
 from selenium.common.exceptions import StaleElementReferenceException, WebDriverException, NoSuchElementException
 from Services.ErrorService import ErrorsHandler
@@ -63,8 +64,11 @@ class HomePage(GenericPO):
         if env == 'test':
             GenericPO.webDriver.openSut(config['SUT']['TEST'])
 
+        time.sleep(3)
+
         if env == 'prod':
             GenericPO.webDriver.openSut(config['SUT']['PROD'])
+        time.sleep(3)
 
     @staticmethod
     def getSutUrl():
@@ -100,6 +104,25 @@ class HomePage(GenericPO):
                                           By.ID).click()
 
     @staticmethod
+    def getLogoOrderText():
+        logo_order_text = GenericPO.webDriver.findElementBy(
+            config['HOME_PAGE']['LOCATORS']['LOGO_TEXT_ORDER_TEXT_AREA'], By.XPATH).text
+
+        return logo_order_text
+
+    @staticmethod
+    def getSupportText():
+        support_text_list = GenericPO.webDriver.findElementsBy(
+            config['HOME_PAGE']['LOCATORS']['HOME_SUPPORT_TEXT_AREA'], By.XPATH)
+
+        support_text = ""
+
+        for item in support_text_list:
+            support_text = support_text + item.text
+
+        return support_text
+
+    @staticmethod
     def getLoginConnectedButtonText():
         time.sleep(3)
         text = GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['CONNECT_BTN_TEXT_AREA'],
@@ -107,10 +130,10 @@ class HomePage(GenericPO):
         return text
 
     @staticmethod
-    def getLoginUnConectedButtonText():
+    def getLoginUnConnectedButtonText():
         time.sleep(3)
         text = GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['CONNECT_BTN'],
-                                          By.ID).text
+                                                 By.ID).text
         return text
 
     @staticmethod
@@ -125,9 +148,9 @@ class HomePage(GenericPO):
         return place_holders
 
     @staticmethod
-    def chooseLocation():
+    def chooseLocation(location_name):
         GenericPO.webDriver.selectFromDropDown(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'],
-                                               config['HOME_PAGE']['DATA']['SECOND_LOCATION'])
+                                               location_name)
 
         time.sleep(2)
 
@@ -136,6 +159,12 @@ class HomePage(GenericPO):
         locations_list = GenericPO.webDriver.getDropDownOptionsList(config['HOME_PAGE']['LOCATORS']['SELECT_LOCATION_DROP_DOWN'])
 
         return locations_list
+
+    @staticmethod
+    def getDatesList():
+        dates_list = GenericPO.webDriver.getDropDownOptionsList(config['HOME_PAGE']['LOCATORS']['SELECT_DATE_DROP_DOWN'])
+
+        return dates_list
 
     @staticmethod
     def getTestLocation(locations_list, location_to_find):
@@ -270,13 +299,13 @@ class HomePage(GenericPO):
     @staticmethod
     def getFooterTxt():
 
-        footerTxts = [GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['FOOTER_FIRST_PART'],
-                                                        By.XPATH).text,
-                      GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['FOOTER_SECOND_PART'],
-                                                        By.XPATH).text,
-                      GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['FOOTER_THIRD_PART'],
-                                                        By.XPATH).text]
-        return footerTxts
+        footer_txts = [GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['FOOTER_FIRST_PART'],
+                                                         By.XPATH).text,
+                       GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['FOOTER_SECOND_PART'],
+                                                         By.XPATH).text,
+                       GenericPO.webDriver.findElementBy(config['HOME_PAGE']['LOCATORS']['FOOTER_THIRD_PART'],
+                                                         By.XPATH).text]
+        return footer_txts
 
 
 
@@ -309,7 +338,7 @@ class Account(GenericPO):
                 time.sleep(1)
 
         except NoSuchElementException:
-            logging.error(ErrorsHandler.WALLET_IS_NOT_VISIBLE)
+                logging.error(ErrorsHandler.WALLET_IS_NOT_VISIBLE)
 
     @staticmethod
     def clickOnGiftCards():
@@ -342,6 +371,12 @@ class Account(GenericPO):
 class AccountInformation(GenericPO):
 
     @staticmethod
+    def getPersonalInfoModal():
+        opened = GenericPO.webDriver.findElementBy(config['PERSONAL_INFO_SCREEN']['LOCATORS']['PERSONAL_INFO_MODAL'], By.XPATH)
+
+        return opened
+
+    @staticmethod
     def getNameText():
         name_text = GenericPO.webDriver.findElementBy("//*[@id='modal-body']/div/div[1]/div/input",
                                                       By.XPATH).text
@@ -354,18 +389,18 @@ class History(GenericPO):
     @staticmethod
     def getHistoryList():
 
-        history_list = GenericPO.webDriver.remoteWebDriver.find_elements_by_xpath(config['HISTORY_SCREEN']['LOCATORS']['HISTORY_ORDERS_LIST'],
+        history_list = GenericPO.webDriver.find_elements_by_xpath(config['HISTORY_SCREEN']['LOCATORS']['HISTORY_ORDERS_LIST'],
                                                                                   By.XPATH)
         return history_list
 
 
     @staticmethod
-    def getHistoryFirstOrderPrice():
+    def getHistoryOrderPriceByIndex(order_index):
 
-        history_list = GenericPO.webDriver.remoteWebDriver.find_elements_by_xpath(
+        history_list = GenericPO.webDriver.find_elements_by_xpath(
                                 config['HISTORY_SCREEN']['LOCATORS']['HISTORY_ORDERS_LIST'])
 
-        first_order_price = history_list[0].find_element_by_xpath(config['HISTORY_SCREEN']['LOCATORS']
+        first_order_price = history_list[order_index].find_element_by_xpath(config['HISTORY_SCREEN']['LOCATORS']
                                                                     ['FIRST_ORDER_PRICE']).text
 
         return first_order_price
@@ -514,7 +549,7 @@ class Wallet(GenericPO):
                     GenericPO.webDriver.findElementBy(config['WALLET']['LOCATORS']['ADD_NEW_CARD_BUTTON_HEADER'],
                                                       By.XPATH).click()
 
-        # GenericPO.webDriver.switchToIframe(GenericPO.webDriver.remoteWebDriver.find_element_by_xpath
+        # GenericPO.webDriver.switchToIframe(GenericPO.webDrive.find_element_by_xpath
         #                                  (params['WALLET']['LOCATORS']['CC_VALUES_IFRAME']))
 
     @staticmethod
@@ -526,8 +561,8 @@ class Wallet(GenericPO):
     @staticmethod
     def enterCcNumber():
         try:
-            GenericPO.webDriver.switchToIframe(GenericPO.webDriver.remoteWebDriver.find_element_by_xpath
-                                               (config['WALLET']['LOCATORS']['CC_VALUES_IFRAME']))
+            GenericPO.webDriver.switchToIframe(GenericPO.webDriver.findElementBy(
+                                               config['WALLET']['LOCATORS']['CC_VALUES_IFRAME'], By.XPATH))
 
             GenericPO.webDriver.findElementBy(config['WALLET']['LOCATORS']['CC_NUMBER_INPUT'],
                                               By.ID).send_keys(
@@ -555,13 +590,13 @@ class Wallet(GenericPO):
     def clickOnCcApplyButton():
         GenericPO.webDriver.findElementBy(config['WALLET']['LOCATORS']['APPLY_BUTTON'],
                                           By.ID).click()
-        GenericPO.webDriver.remoteWebDriver.switch_to.default_content()
+        GenericPO.webDriver.switch_to.default_content()
 
         time.sleep(6)
 
     @staticmethod
     def getCcApplyButtonText():
-        GenericPO.webDriver.switchToIframe(GenericPO.webDriver.remoteWebDriver.find_element_by_xpath
+        GenericPO.webDriver.switchToIframe(GenericPO.webDriver.find_element_by_xpath
                                            (config['WALLET']['LOCATORS']['CC_VALUES_IFRAME']))
 
         apply_button_text = GenericPO.webDriver.findElementBy(config['WALLET']['LOCATORS']['APPLY_BUTTON'],
@@ -573,19 +608,19 @@ class Wallet(GenericPO):
 
 
         try:
-            GenericPO.webDriver.switchToIframe(GenericPO.webDriver.remoteWebDriver.find_element_by_xpath
+            GenericPO.webDriver.switchToIframe(GenericPO.webDriver.find_element_by_xpath
                                                (config['WALLET']['LOCATORS']['CC_VALUES_IFRAME']))
 
             GenericPO.webDriver.findElementBy(config['WALLET']['LOCATORS']['CANCEL_BUTTON'],
                                               By.ID).click()
-            GenericPO.webDriver.remoteWebDriver.switch_to.default_content()
+            GenericPO.webDriver.switch_to.default_content()
 
         except WebDriverException:
             return False
 
     @staticmethod
     def getCcCancelButtonText():
-        # GenericPO.webDriver.switchToIframe(GenericPO.webDriver.remoteWebDriver.find_element_by_xpath
+        # GenericPO.webDriver.switchToIframe(GenericPO.webDriver.find_element_by_xpath
         #                                  (params['WALLET']['LOCATORS']['CC_VALUES_IFRAME']))
 
         cancel_button_text = GenericPO.webDriver.findElementBy(config['WALLET']['LOCATORS']['CANCEL_BUTTON'],
@@ -663,7 +698,7 @@ class Wallet(GenericPO):
 
     @staticmethod
     def getWeAcceptCardsIcons():
-        GenericPO.webDriver.remoteWebDriver.find_elements_by_xpath(config['WALLET']['LOCATORS']['WALLET_ACCEPTED_CARDS_AREA'])
+        GenericPO.webDriver.find_elements_by_xpath(config['WALLET']['LOCATORS']['WALLET_ACCEPTED_CARDS_AREA'])
 
     @staticmethod
     def getPciFooterText():
@@ -715,6 +750,7 @@ class Wallet(GenericPO):
         Wallet.clickOnCcApplyButton()
 
 
+@pytest.mark.usefixtures("platform")
 class Menu(GenericPO):
 
 

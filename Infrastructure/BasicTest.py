@@ -8,3 +8,4 @@ class BasicTestClass:
 
     webDriver = Wrapper()
     env = None
+    platform = None

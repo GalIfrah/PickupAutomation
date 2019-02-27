@@ -25,23 +25,23 @@ class ProjectUtils:
     @staticmethod
     def createRandomMail():
 
-        randEmail = ''.join(random.choice('0123456789ABCDEF') for i in range(16)) + '@mycheck.co.il'
+        rand_email = ''.join(random.choice('0123456789ABCDEF') for i in range(16)) + '@mycheck.co.il'
 
-        return randEmail
+        return rand_email
 
     @staticmethod
     def createRandomSmsCode():
 
-        randSms = ''.join(random.choice('0123456789') for i in range(6))
+        rand_sms = ''.join(random.choice('0123456789') for i in range(6))
 
-        return randSms
+        return rand_sms
 
     @staticmethod
     def createRandomScreenShotNumber():
 
-        screenShotNumber = ''.join(random.choice('0123456789') for i in range(3))
+        screen_shot_number = ''.join(random.choice('0123456789') for i in range(3))
 
-        return screenShotNumber
+        return screen_shot_number
 
     @staticmethod
     def imagesComparator(image1, image2):

@@ -1,4 +1,3 @@
-# from SutTests.TestsClassesInit import *
 import unittest
 from App import PageObjects
 from App.PageObjects import *

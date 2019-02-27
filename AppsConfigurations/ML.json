@@ -16,8 +16,10 @@
                               "CONNECT_BTN": "login-btn",
                               "CONNECT_BTN_TEXT_AREA": "//div[@id='login-btn']/span",
                               "START_ORDER_BUTTON": "//div/button[@class='button button-block start-order ng-binding']",
+                              "HOME_SUPPORT_TEXT_AREA": 0,
                               "START_ORDER_POPUP_TEXT_AREA": "//div[@class='popup-body']",
                               "START_ORDER_POPUP_BUTTON": "//div/button[@class='button ng-binding app-bg-color no-border']",
+                              "LOGO_TEXT_ORDER_TEXT_AREA": "//div[@class='start-order-title ng-binding']",
                               "TERMS_AND_COND_LINK": "//span[@class='small ng-scope']/a[1]",
                               "PRIVACY_POLICY_LINK": "//span[@class='small ng-scope']/a[2]",
                               "SELECT_LOCATION_DROP_DOWN": "home-select-location",
@@ -46,7 +48,10 @@
                          "FIRST_LOCATION_NOT_WORKING": "MEATliquor W1",
                          "SECOND_LOCATION": "MEATmarket Covent Garden",
                          "DATE": "Tomorrow",
-                         "TIME": "14:20"
+                         "TIME": "14:20",
+                         "DATES_LIMIT": 0,
+                         "DATES_LIMIT_NUMBER": "",
+                         "DATES_LIMIT_VALUE": "Today only"
                 },
 
                 "TEXTS": {
@@ -61,8 +66,9 @@
                           "START_ORDER_CHOOSE_LOCATION_POPUP_TEXT": "Please select a location",
                           "START_ORDER_TIME_EXCEEDED_POPUP_TEXT": "",
                           "START_ORDER_NOT_ACCEPTING_POPUP_TEXT": "Ouch! This restaurant is currently not accepting online orders. Please call us on .",
-                          "START_ORDER_SELECT_TIME_POPUP_TEXT": "Please Select Time"
-
+                          "START_ORDER_SELECT_TIME_POPUP_TEXT": "Please Select Time",
+                          "LOGO_TEXT_ORDER_TEXT": "Order & Collect",
+                          "HOME_SUPPORT_TEXT": ""
                 }
 
   },

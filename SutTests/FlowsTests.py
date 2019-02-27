@@ -1,4 +1,3 @@
-# from SutTests.TestsClassesInit import *
 import unittest
 from builtins import print
 
@@ -18,7 +17,7 @@ class FlowsTestsClass(BasicTestClass, unittest.TestCase):
 
             Wallet.closeWallet()
 
-            HomePage.startOrder(2)
+            HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
             GenericPO.webDriver.saveScreenShot(1, self.testName)
 
@@ -56,7 +55,7 @@ class FlowsTestsClass(BasicTestClass, unittest.TestCase):
 
             Account.clickOnHistory()
 
-            history_order_price = History.getHistoryFirstOrderPrice()
+            history_order_price = History.getHistoryOrderPriceByIndex(order_index=0)
 
             assert history_order_price == confirmation_total_price, ErrorsHandler.WRONG_HISTORY_TOTAL
 
@@ -65,7 +64,7 @@ class FlowsTestsClass(BasicTestClass, unittest.TestCase):
 
             Connect.login()
 
-            HomePage.startOrder(2)
+            HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
             Menu.chooseFirstCategory()
 
@@ -121,6 +120,6 @@ class FlowsTestsClass(BasicTestClass, unittest.TestCase):
 
             Account.clickOnHistory()
 
-            history_order_price = History.getHistoryFirstOrderPrice()
+            history_order_price = History.getHistoryOrderPriceByIndex(order_index=0)
 
             assert history_order_price == confirmation_total_price, ErrorsHandler.WRONG_HISTORY_TOTAL

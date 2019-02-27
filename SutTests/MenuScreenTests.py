@@ -1,4 +1,3 @@
-# from SutTests.TestsClassesInit import *
 import unittest
 from builtins import print
 from App import PageObjects
@@ -12,7 +11,7 @@ class MenuTestsClass(BasicTestClass, unittest.TestCase):
 
     def test_100_chooseCategory(self):
 
-        HomePage.startOrder(2)
+        HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
         Menu.chooseSecondCategory()
 
@@ -21,7 +20,7 @@ class MenuTestsClass(BasicTestClass, unittest.TestCase):
     @unittest.skipIf(config['MENU']['DATA']['AGE_LIMIT'] == 0, reason=ErrorsHandler.FEATURE_NOT_EXIST_ON_APP)
     def test_101_checkAgeRestriction(self):
 
-        HomePage.startOrder(2)
+        HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
         Menu.chooseRestrictedAgeCategory()
 
@@ -41,7 +40,7 @@ class MenuTestsClass(BasicTestClass, unittest.TestCase):
     @unittest.skipIf(config['MENU']['DATA']['AMOUNT_LIMIT'] == 0, reason=ErrorsHandler.FEATURE_NOT_EXIST_ON_APP)
     def test_102_checkOrderItemLimit(self):
 
-        HomePage.startOrder(2)
+        HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
         for i in range(config['MENU']['DATA']['AMOUNT_LIMIT_NUMBER'] + 1):
                 Menu.chooseSecondItem()
@@ -53,7 +52,7 @@ class MenuTestsClass(BasicTestClass, unittest.TestCase):
     @unittest.skipIf(config['MENU']['LOCATORS']['UP_SALE_ITEM'] == 0, reason=ErrorsHandler.FEATURE_NOT_EXIST_ON_APP)
     def test_103_checkUpsSales(self):
 
-        HomePage.startOrder(2)
+        HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
         Menu.chooseUpSaleItem()
 
@@ -63,7 +62,7 @@ class MenuTestsClass(BasicTestClass, unittest.TestCase):
 
     def test_104_openAndCloseModifiersModal(self):
 
-        HomePage.startOrder(2)
+        HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
         Menu.chooseSecondItem()
 
@@ -80,7 +79,7 @@ class MenuTestsClass(BasicTestClass, unittest.TestCase):
     @unittest.skipIf(config['MENU']['DATA']['MODIFIERS'] == 0, reason=ErrorsHandler.FEATURE_NOT_EXIST_ON_APP)
     def test_105_checkModifiersSelection(self):
 
-        HomePage.startOrder(2)
+        HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
         Menu.clickOnEditItem()
 
@@ -97,7 +96,7 @@ class MenuTestsClass(BasicTestClass, unittest.TestCase):
 
     def test_106_addItemToCart(self):
 
-        HomePage.startOrder(2)
+        HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
         cart_items_number_before_adding = len(Menu.getCartItemsList())
 
@@ -119,7 +118,7 @@ class MenuTestsClass(BasicTestClass, unittest.TestCase):
 
     def test_107_deleteItemFromCart(self):
 
-        HomePage.startOrder(2)
+        HomePage.startOrder(config['HOME_PAGE']['DATA']['TEST_BUSINESS'])
 
         Menu.chooseSecondItem()
 
