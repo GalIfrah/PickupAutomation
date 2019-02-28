@@ -67,7 +67,7 @@ class Wrapper:
         action = ActionChains(self.driver)
 
         action.move_to_element(self.driver.find_element_by_xpath(first_element_locator)).move_to_element(
-            (self.driver.find_element_by_xpath(second_element_locator))).double_click((
+            (self.driver.find_element_by_xpath(second_element_locator))).click((
                 self.driver.find_element_by_xpath(second_element_locator))).perform()
 
     def selectFromDropDown(self, drop_down_locator, option_text):

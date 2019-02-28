@@ -342,6 +342,7 @@ class Account(GenericPO):
 
     @staticmethod
     def clickOnGiftCards():
+        time.sleep(4)
         GenericPO.webDriver.hoverAndClick(config['HOME_PAGE']['LOCATORS']['ACCOUNT']['ACCOUNT_BUTTON'],
                                           config['HOME_PAGE']['LOCATORS']['ACCOUNT']['GIFT_CARDS'])
 

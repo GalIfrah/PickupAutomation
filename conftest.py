@@ -9,7 +9,7 @@ from Infrastructure.BasicTest import BasicTestClass
 web_driver = None
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="class")
 def driver_init(request, env):
 
     # from selenium import webdriver
